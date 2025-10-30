@@ -1,0 +1,12 @@
+version: 1
+frontend:
+  phases:
+    build:
+      commands:
+        - cd frontend && npm install && npx expo export --platform web
+  artifacts:
+    baseDirectory: /frontend/dist
+    files:
+      - "**/*"
+  cache:
+    paths: []
