@@ -1,0 +1,55 @@
+{
+  "cli": {
+    "version": ">= 12.6.1",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "apk": {},
+    "sit": {
+      "ios": {
+        "releaseChannel": "sit",
+        "distribution": "store",
+        "autoIncrement": true,
+        "credentialsSource": "remote",
+        "env": {
+          "NPM_TOKEN": "@@NPM_TOKEN"
+        }
+      }
+    },
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "ios": {
+        "autoIncrement": true,
+        "credentialsSource": "remote",
+        "simulator": true
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "ios": {
+        "autoIncrement": true,
+        "credentialsSource": "remote"
+      }
+    },
+    "production": {
+      "distribution": "store",
+      "ios": {
+        "simulator": false,
+        "autoIncrement": true,
+        "credentialsSource": "remote",
+        "env": {
+          "NODE_OPTIONS": "--max_old_space_size=8192"
+        }
+      }
+    }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "appleId": "dhuntleypro@icloud.com",
+        "appleTeamId": "SNW84Q39QZ"
+      }
+    }
+  }
+}

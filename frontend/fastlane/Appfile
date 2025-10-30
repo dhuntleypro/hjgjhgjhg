@@ -1,0 +1,10 @@
+# App Identifier (Bundle ID)
+
+
+# Apple Developer Account Information
+apple_id(ENV['APPLE_ID']) # Your Apple ID email address
+team_id(ENV['APPLE_TEAM_ID']) # Your Apple Developer Team ID
+
+
+
+

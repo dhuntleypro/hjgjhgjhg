@@ -1,0 +1,117 @@
+
+
+# locally works
+platform :ios do
+  desc "🚀 Create app using App Store Connect API key"
+  lane :create_app do
+    require 'spaceship'
+    require 'base64'
+
+    decoded_key = Base64.decode64("LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JR1RBZ0VBTUJNR0J5cUdTTTQ5QWdFR0NDcUdTTTQ5QXdFSEJIa3dkd0lCQVFRZ0NjZGp6Q3o0U0hnZjNBZ2ErOHZFdVhKMkZNQm9QbVlpSlRwNVQyakI1M3FnQ2dZSUtvWkl6ajBEQVFlaFJBTkNBQVRWbytGZkpORjEwNnBKOWlJWHlTL3oyMU11Um1QVVBsL2dZSjQvZEllMGxsK3lGV1ppaDVhYkFNakhON3ZSZXYrLzQ5NlZyY2pvV3RhUWIrR2tXdnRlCi0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0=")
+
+    token = Spaceship::ConnectAPI::Token.create(
+      key_id: "9V53SHJ63M",
+      issuer_id: "2edc83fb-4b11-4f97-8bcd-de7a6f07a582",
+      key: decoded_key,
+      duration: 1200,
+      in_house: false
+    )
+
+    Spaceship::ConnectAPI.token = token
+
+
+    UI.message("🔍 Checking if app already exists... for com.dhuntleyinc.disappr-ffoffobbbdkffqdkhq")
+    app = Spaceship::ConnectAPI::App.find("com.dhuntleyinc.disappr-ffoffobbbdkffqdkhq")
+
+    if app
+      UI.success("✅ App already exists: com.dhuntleyinc.disappr-ffoffobbbdkffqdkhq")
+    else
+      UI.message("📦 App not found. Creating app...")
+
+      produce(
+        username: "dhuntleypro@icloud.com",
+        app_name: "disappr-ffoffobbbdkffqdkhq",
+        app_identifier: "com.dhuntleyinc.disappr-ffoffobbbdkffqdkhq",
+        sku: "SKU-ffoffobbbdkffqdkhq",
+        platform: "ios",
+        language: "en-US",
+        team_id: "SNW84Q39QZ", # 🔥 Add this manually if ENV doesn't work
+        skip_itc: false,
+        skip_devcenter: false
+      )
+
+      UI.success("🚀 App created: disappr-ffoffobbbdkffqdkhq")
+    end
+  end
+
+  # desc "🔐 Sync certs and provisioning profiles"
+  # lane :setup_certs do
+  #   match(
+  #     type: "appstore",
+  #     app_identifier: ENV["APP_IDENTIFIER"],
+  #     readonly: false,
+  #     git_url: ENV["MATCH_GIT_URL"]
+  #   )
+  # end
+end
+
+
+
+
+# platform :ios do
+#   desc "🚀 Create app using App Store Connect API key"
+#   lane :create_app do
+#     require 'spaceship'
+#     require 'base64'
+
+#     decoded_key = Base64.decode64("LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JR1RBZ0VBTUJNR0J5cUdTTTQ5QWdFR0NDcUdTTTQ5QXdFSEJIa3dkd0lCQVFRZ0NjZGp6Q3o0U0hnZjNBZ2ErOHZFdVhKMkZNQm9QbVlpSlRwNVQyakI1M3FnQ2dZSUtvWkl6ajBEQVFlaFJBTkNBQVRWbytGZkpORjEwNnBKOWlJWHlTL3oyMU11Um1QVVBsL2dZSjQvZEllMGxsK3lGV1ppaDVhYkFNakhON3ZSZXYrLzQ5NlZyY2pvV3RhUWIrR2tXdnRlCi0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0=")
+
+#     token = Spaceship::ConnectAPI::Token.create(
+#       key_id: "9V53SHJ63M",
+#       issuer_id: "2edc83fb-4b11-4f97-8bcd-de7a6f07a582",
+#       key: decoded_key,
+#       duration: 1200,
+#       in_house: false
+#     )
+
+#     Spaceship::ConnectAPI.token = token
+
+#     # Wipe any fallback auth env vars
+#     ENV["FASTLANE_USER"] = nil
+#     ENV["DELIVER_USER"] = nil
+#     ENV["PRODUCE_USERNAME"] = nil
+
+#     UI.message("🔍 Checking if app already exists... for com.dhuntleyinc.disappr-ffoffffodkffqdkhq")
+#     app = Spaceship::ConnectAPI::App.find("com.dhuntleyinc.disappr-ffoffffodkffqdkhq")
+
+#     if app
+#       UI.success("✅ App already exists: com.dhuntleyinc.disappr-ffoffffodkffqdkhq")
+#     else
+#       UI.message("📦 App not found. Creating app...")
+
+#       produce(
+#         username: "dhuntleypro@icloud.com",
+#         app_name: "Disappr fuoojnoohj4",
+#         app_identifier: "com.dhuntleyinc.disappr-ffoffffodkffqdkhq",
+#         sku: "SKU-ffoffffodkffqdkhq",
+#         platform: "ios",
+#         language: "en-US",
+#         team_id: "SNW84Q39QZ", # 🔥 Add this manually if ENV doesn't work
+#         skip_itc: false,
+#         skip_devcenter: false
+#       )
+
+#       UI.success("🚀 App created: disappr-ffoffobbbdkffqdkhq")
+#     end
+#   end
+
+#   desc "🔐 Sync certs and provisioning profiles"
+#   lane :setup_certs do
+#     match(
+#       type: "appstore",
+#       app_identifier: ENV["APP_IDENTIFIER"],
+#       readonly: false,
+#       git_url: ENV["MATCH_GIT_URL"]
+#     )
+#   end
+# end

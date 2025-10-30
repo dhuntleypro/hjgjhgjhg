@@ -1,0 +1,1 @@
+Test credentials for accessing the app’s full features.

@@ -1,0 +1,13 @@
+# The Deliverfile allows you to store various App Store Connect metadata
+# For more information, check out the docs
+# https://docs.fastlane.tools/actions/deliver/
+
+
+## Automatically submit the app for review after uploading
+submit_for_review true
+
+## Metadata path
+# metadata_path "./ios/metadata"
+
+## Path to screenshots (if you want to automate screenshots upload)
+# screenshots_path "./screenshots"
